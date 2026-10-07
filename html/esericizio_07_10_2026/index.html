@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Esercizi Base</title>
+</head>
+<body>
+
+  <h3>1) Fattoriale</h3>
+  <script>
+    let n = prompt("Inserisci un numero:");
+    let f = 1;
+    for (let i = 1; i <= n; i++) {
+      f = f * i;
+    }
+    document.write("Il fattoriale di " + n + " e': " + f);
+  </script>
+
+  <hr>
+
+  <h3>2) Numeri Pari da 1 a 20</h3>
+  <p>
+  <script>
+    for (let i = 1; i <= 20; i++) {
+      if (i % 2 == 0) {
+        document.write(i + " ");
+      }
+    }
+  </script>
+  </p>
+
+  <hr>
+
+  <h3>3) Fibonacci fino a 100</h3>
+  <p>
+  <script>
+    let a = 0;
+    let b = 1;
+    
+    do {
+      document.write(a + " ");
+      let c = a + b;
+      a = b;
+      b = c;
+    } while (a <= 100);
+  </script>
+  </p>
+
+  <hr>
+
+  <h3>4) Tavola Pitagorica</h3>
+  <table border="1">
+  <script>
+    for (let i = 1; i <= 10; i++) {
+      document.write("<tr>");
+      for (let j = 1; j <= 10; j++) {
+        document.write("<td>" + (i * j) + "</td>");
+      }
+      document.write("</tr>");
+    }
+  </script>
+  </table>
+
+</body>
+</html>
