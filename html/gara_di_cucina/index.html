@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestione Contatti</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .box { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <form id="mioForm">
+        Nome: <input type="text" id="nome"><br><br>
+        Ruolo: 
+        <select id="ruolo">
+            <option value="Studente">Studente</option>
+            <option value="Docente">Docente</option>
+        </select><br><br>
+        <button type="button" onclick="aggiungi()">Aggiungi</button>
+        <button type="button" onclick="rimuovi()">Rimuovi</button>
+    </form>
+
+    <h3>Lista:</h3>
+    <select id="lista" size="5" style="width: 200px;"></select>
+
+    <h3>Descrizione:</h3>
+    <div id="areaDinamica"></div>
+
+    <h3>Elementi Rimossi:</h3>
+    <div id="areaRimossi" class="box"></div>
+
+<script>
+    function aggiungi() {
+        var nome = document.getElementById("nome").value;
+        var ruolo = document.getElementById("ruolo").value;
+
+        if (nome == "") return;
+
+        var opzione = document.createElement("option");
+        opzione.value = nome;
+        opzione.text = nome + " - " + ruolo;
+        document.getElementById("lista").appendChild(opzione);
+
+        var paragrafo = document.createElement("p");
+        paragrafo.id = "p_" + nome;
+        paragrafo.innerHTML = "Nome: <b>" + nome + "</b>, Ruolo: <b>" + ruolo + "</b>";
+        document.getElementById("areaDinamica").appendChild(paragrafo);
+
+        document.getElementById("nome").value = "";
+    }
+
+    function rimuovi() {
+        var nomeDaCancellare = document.getElementById("nome").value;
+        var lista = document.getElementById("lista");
+        var paragrafo = document.getElementById("p_" + nomeDaCancellare);
+        var areaRimossi = document.getElementById("areaRimossi");
+
+        for (var i = 0; i < lista.options.length; i++) {
+            if (lista.options[i].value == nomeDaCancellare) {
+                lista.remove(i);
+            }
+        }
+
+        if (paragrafo) {
+            areaRimossi.appendChild(paragrafo);
+        }
+
+        document.getElementById("nome").value = "";
+    }
+</script>
+
+</body>
+</html>
