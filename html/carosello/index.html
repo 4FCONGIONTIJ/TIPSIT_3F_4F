@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Galleria Immagini</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f2f2;
+        }
+
+        .container {
+            background: white;
+            width: 700px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>La mia Galleria di Immagini</h1>
+
+    <img id="immagine" src="" alt="Immagine">
+    <p id="didascalia"></p>
+
+    <hr>
+
+    <h2>Aggiungi una nuova immagine</h2>
+
+    <input type="text" id="url" placeholder="URL immagine">
+    <br>
+
+    <input type="text" id="testo" placeholder="Didascalia">
+    <br>
+
+    <button onclick="aggiungiImmagine()">Aggiungi</button>
+
+    <p id="messaggio"></p>
+
+</div>
+
+<script>
+
+    let immagini = [
+        {
+            url: "https://picsum.photos/id/1015/700/350",
+            didascalia: "Paesaggio montano"
+        },
+        {
+            url: "https://picsum.photos/id/1018/700/350",
+            didascalia: "Montagne e natura"
+        },
+        {
+            url: "https://picsum.photos/id/1025/700/350",
+            didascalia: "Un simpatico animale"
+        }
+    ];
+
+    let indice = 0;
+
+    function mostraImmagine() {
+        document.getElementById("immagine").src = immagini[indice].url;
+
+        document.getElementById("didascalia").textContent = immagini[indice].didascalia;
+    }
+
+    function cambiaImmagine() {
+        indice++;
+
+        if (indice >= immagini.length) {
+            indice = 0;
+        }
+
+        mostraImmagine();
+    }
+
+    setInterval(cambiaImmagine, 3000);
+
+    function aggiungiImmagine() {
+
+        let url = document.getElementById("url").value;
+        let testo = document.getElementById("testo").value;
+
+        if (url == "" || testo == "") {
+            document.getElementById("messaggio").textContent =
+                "Compila tutti i campi!";
+            return;
+        }
+
+        immagini.push({
+            url: url,
+            didascalia: testo
+        });
+
+        document.getElementById("url").value = "";
+        document.getElementById("testo").value = "";
+
+        document.getElementById("messaggio").textContent =
+            "Immagine aggiunta!";
+
+    }
+
+    mostraImmagine();
+
+</script>
+
+</body>
+</html>
